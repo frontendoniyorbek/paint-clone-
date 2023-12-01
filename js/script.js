@@ -18,10 +18,18 @@ let ctx = canvas.getContext('2d'),
 	prevMouseY,
 	snapshot;
 
+// SET CANVAS BACKGROUND
+const setCannvasBackground = () => {
+	ctx.fillStyle = '#fff';
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = selectedColor;
+};
+
 // SET CANVAS WIDTH AND HEIGHT
 window.addEventListener('load', () => {
 	canvas.width = canvas.offsetWidth;
 	canvas.height = canvas.offsetHeight;
+	setCannvasBackground();
 });
 
 // START DRAWING
@@ -115,6 +123,20 @@ colorBtns.forEach(btn => {
 colorPicker.addEventListener('change', () => {
 	colorPicker.parentElement.style.background = colorPicker.value;
 	colorPicker.parentElement.click();
+});
+
+// CLEAR CANVAS BUTTON
+clearCanvasBtn.addEventListener('click', () => {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	setCannvasBackground();
+});
+
+// SAVE LIKE IMAGE OUR PAINT
+saveImageBtn.addEventListener('click', () => {
+	const link = document.createElement('a');
+	link.download = `DTN-paint${Date.now()}.jpg`;
+	link.href = canvas.toDataURL();
+	link.click();
 });
 
 // STOP DRAWING
