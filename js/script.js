@@ -4,7 +4,9 @@ const canvas = document.querySelector('canvas'),
 	fillColor = document.querySelector('#fill-color'),
 	sizeSlider = document.querySelector('#size-slider'),
 	colorBtns = document.querySelectorAll('.colors .option'),
-	colorPicker = document.querySelector('#color-picker');
+	colorPicker = document.querySelector('#color-picker'),
+	clearCanvasBtn = document.querySelector('.clear-canvas'),
+	saveImageBtn = document.querySelector('.save-img');
 
 // VARIABLE WITH DEFAULT VALUE
 let ctx = canvas.getContext('2d'),
@@ -76,6 +78,11 @@ const drawing = e => {
 			break;
 		case 'triangle':
 			drawTriangle(e);
+			break;
+		case 'eraser':
+			ctx.strokeStyle = '#fff';
+			ctx.lineTo(e.offsetX, e.offsetY);
+			ctx.stroke();
 			break;
 		default:
 			break;
